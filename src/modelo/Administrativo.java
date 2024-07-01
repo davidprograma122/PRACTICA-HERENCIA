@@ -43,7 +43,7 @@ public class Administrativo extends Personah {
     public void setArea(String area) {
         this.area = area;
     }
-    public String imprirmirA(){
+    public String imprirmir(){
         return ("------------DATOS DE PERSONA------------\n"
                 + "NOMBRE: "+ getNombre()+"\n"
                 + "APELLIDO: "+ getApellido()+"\n"

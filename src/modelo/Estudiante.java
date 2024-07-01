@@ -1,4 +1,4 @@
-package modelo;
+    package modelo;
 /**
  *
  * @author david
@@ -52,7 +52,7 @@ public class Estudiante extends Personah{
         this.jormnada = jormnada;
     }
     
-    public String imprirmirE(){
+    public String imprirmir(){
         return "------------DATOS DE PERSONA------------\n"
                 + "NOMBRE: "+ getNombre()+"\n"
                 + "APELLIDO: "+ getApellido()+"\n"

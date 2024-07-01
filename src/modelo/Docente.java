@@ -74,7 +74,7 @@ public class Docente extends Personah {
 
     
    
-    public String imprirmir1(){
+    public String imprirmir(){
         return ("------------DATOS DE PERSONA------------\n"
                 + "NOMBRE: "+ getNombre()+"\n"
                 + "APELLIDO: "+ getApellido()+"\n"

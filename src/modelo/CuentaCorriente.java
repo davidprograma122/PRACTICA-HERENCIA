@@ -6,16 +6,10 @@ package modelo;
 public class CuentaCorriente extends Cuenta {
     private double sobregiro;
 
-    public CuentaCorriente() {
-    }
-
-    public CuentaCorriente(double sobregiro) {
+    public CuentaCorriente(double sobregiro, double saldo, int numeroConsignaciones, int numeroRetiros, double tasaAnual, double comisionMensual) {
+        super(saldo, numeroConsignaciones, numeroRetiros, tasaAnual, comisionMensual);
         this.sobregiro = sobregiro;
-    }
 
-    public CuentaCorriente(double sobregiro, double saldo, double tasaAnual) {
-        super(saldo, tasaAnual);
-        this.sobregiro = sobregiro;
     }
 
     public double getSobregiro() {
@@ -25,31 +19,45 @@ public class CuentaCorriente extends Cuenta {
     public void setSobregiro(double sobregiro) {
         this.sobregiro = sobregiro;
     }
-    
-    @Override
-    public void retiro(double valorRetiro){
-        if (valorRetiro>getSaldo()){
-            setSobregiro((getSobregiro() + valorRetiro) - getSaldo());
+
+    public void retiroCorriente(double valorRetiro) {
+        if (valorRetiro > getSaldo()) {
+            setSobregiro(valorRetiro - getSaldo());
             setSaldo(0);
-            setNumRetiros(getNumRetiros()+1);
-        }else{
-            super.retiro(valorRetiro);
-            setNumRetiros(getNumRetiros()+1);
+            setNumeroRetiros(getNumeroRetiros()+1);
+            System.out.println("Su saldo actual es 0 y el valor que adeuda como sobregiro al banco es:" + getSobregiro());
+        } else {
+            this.retiro(valorRetiro);
         }
+
     }
-    public void deporitar(double valorDeposito){
-        super.deposito(valorDeposito);
-        if(getSobregiro()>0){
-            setSobregiro(getSobregiro()-valorDeposito);
-            if(getSobregiro()<=0){
-                deposito(valorDeposito+getSaldo());
+
+    public void depositoCorriente(double valorDepositar) {
+        if (getSobregiro() > 0) {
+            if (valorDepositar < getSaldo()) {
+                setSobregiro(getSobregiro() - valorDepositar);
+                setNumeroConsignaciones(getNumeroConsignaciones()+1);
+                System.out.println("Usted está sobregirado por:"+getSobregiro());
+            } else {
+                double saldo = valorDepositar - getSobregiro();
+                setSaldo(saldo);
+                setNumeroConsignaciones(getNumeroConsignaciones()+1);
                 setSobregiro(0);
+                System.out.println("Usted ha cancelado el sobregiro, su saldo actual es:" + getSaldo());
             }
+        } else {
+            this.deposito(valorDepositar);
         }
     }
+
     public void imprimir() {
-        super.imprimir();
-        System.out.println("Sobregiro: " + getSobregiro());
+        System.out.println("DATOS CUENTA CORRIENTE\n"
+                + "Saldo:" + getSaldo() + "\n"
+                + "Sobregiro:" + getSobregiro() + "\n"
+                + "Número de Depositos:" + getNumeroConsignaciones() + "\n"
+                + "Número de Retiros:" + getNumeroRetiros() + "\n"
+                + "Tasa Anual Interes:" + getTasaAnual() + "\n"
+                + "Comisión Banco:" + getComisionMensual());
+
     }
-    
 }

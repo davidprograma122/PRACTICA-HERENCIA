@@ -4,72 +4,86 @@ package modelo;
  * @author david
  */
 public class CuentaAhorros extends Cuenta {
-    private boolean activa;
+    private boolean estado;
 
-    public CuentaAhorros() {
-    }
-
-    public CuentaAhorros(boolean activa, double saldo, double tasaAnual) {
-        super(saldo, tasaAnual);
-        this.activa = activa;
-        
-        
+    public CuentaAhorros(boolean estado, double saldo, int numeroConsignaciones, int numeroRetiros, double tasaAnual, double comisionMensual) {
+        super(saldo, numeroConsignaciones, numeroRetiros, tasaAnual, comisionMensual);
+        this.estado = estado;
+        this.definirEstado();
     }
 
-    public boolean isActiva() {
-        return activa;
+    public boolean isEstado() {
+        return estado;
     }
 
-    public void setActiva(boolean activa) {
-        this.activa = activa;
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
-    
-    public void cuentaActiva(){
-        if (getSaldo()>=0){
-            setActiva(true);
-        }else{
-            setActiva(false);
+
+    public void definirEstado() {
+        if (getSaldo() > 10000) {
+            setEstado(true);
+            System.out.println("Su cuenta de ahorros se encuentra ACTIVA");
+        } else {
+            setEstado(false);
+            System.out.println("Su cuenta de ahorros no posee el saldo suficiente para estar ACTIVA");
         }
     }
-    @Override
-    public void deposito(double valorDepositar){
-        if (isActiva()|| true){
-            super.deposito(valorDepositar);
-        }else{
-            System.out.println("La cuenta de ahorros se encuentra inactiva");
+
+    //Consignar: se puede consignar dinero si la cuenta está activa.
+    //Debe invocar al método heredado.
+    public void depositar(double valorDeposito) {
+        //if(isEstado()==true) if(!isEstado())?esfalso
+        if (isEstado()) {
+            this.deposito(valorDeposito);
+            //super.deposito(valorDeposito);
+        } else {
+            System.out.println("No es posible depositar en cuentas inactivas");
         }
     }
-    @Override
-    public void retiro(double valorRetiro){
-        if(isActiva()||true){
-        super.retiro(valorRetiro);
-            if(getNumRetiros()>4){
-            setComisionMensual(getComisionMensual()+1000);
+
+    //Retirar: es posible retirar dinero si la cuenta está activa.
+    //Debe invocar al método heredado.
+    public void retirar(double valorDeposito) {
+        //if(isEstado()==true) if(!isEstado())?esfalso
+        if (isEstado()) {
+            super.retiro(valorDeposito);
+        } else {
+            System.out.println("No es posible retirar de una cuenta inactiva");
         }
-    }else{
-        System.out.println("La cuenta de ahorros se encuentra inactiva");
-        }
-        cuentaActiva();
     }
-    @Override
-    public void extractoMensual(){
-        super.extractoMensual();
-        cuentaActiva();
-        System.out.println("--------EXTRACTO MENSUAL--------\n"
-                + "Activa: "+isActiva()+"\n"
-                + "Saldo actual: "+getSaldo()+"\n"
-                + "Interes mensual: "+getTasaMensual()+"\n"
-                + "Comisión mensual: "+getComisionMensual());
+
+//    Extracto mensual: si el número de retiros es mayor que 4, por cada 
+//            retiro adicional, se cobra $1000 como comisión mensual. 
+//                    Al generar el extracto, 
+//            se determina si la cuenta está activa o no con el saldo.
+    public void calcularExtractoMensual() {
+        if (getNumeroRetiros() > 4) {
+            double npago = (getNumeroRetiros() - 4) * 1000;
+            setComisionMensual(npago);
+            super.extractoMensual();
+            this.definirEstado();
+        } else {
+            this.extractoMensual();
+            this.definirEstado();
+        }
+
     }
     @Override
     public void imprimir(){
-    System.out.println("--------EXTRACTO MENSUAL--------\n"
-                + "Activa: "+isActiva()+"\n"
-                + "Saldo actual: "+getSaldo()+"\n"
-                + "Interes mensual: "+getTasaMensual()+"\n"
-                + "Comisión mensual: "+getComisionMensual()+"\n"
-                + "Número de consignaciones: "+getNumConsiganciones());
+        String mensaje="";
+        if(isEstado()){
+            mensaje="Activa";
+        }else{
+            mensaje="Inactiva";
+        }
+        System.out.println("DATOS CUENTA DE AHORROS\n"+
+                "Estado de la Cuenta:"+mensaje+"\n"+
+                "Saldo:"+getSaldo()+"\n"+
+                "Número de Depositos:"+getNumeroConsignaciones()+"\n"+
+                "Número de Retiros:"+getNumeroRetiros()+"\n"+
+                "Tasa Anual Interes:"+getTasaAnual()+"\n"+
+                "Comisión Banco:"+getComisionMensual());
+    
     }
-    
-    
 }

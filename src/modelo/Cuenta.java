@@ -5,21 +5,20 @@ package modelo;
  */
 public class Cuenta {
     private double saldo;
-    private int numConsiganciones;
-    private int numRetiros;
+    private int numeroConsignaciones;
+    private int numeroRetiros;
     private double tasaAnual;
-    private double tasaMensual;
     private double comisionMensual;
 
     public Cuenta() {
     }
 
-    public Cuenta(double saldo,double tasaAnual) {
+    public Cuenta(double saldo, int numeroConsignaciones, int numeroRetiros, double tasaAnual, double comisionMensual) {
         this.saldo = saldo;
-        this.numConsiganciones =numConsiganciones ;
-        this.numRetiros = numRetiros;
+        this.numeroConsignaciones = numeroConsignaciones;
+        this.numeroRetiros = numeroRetiros;
         this.tasaAnual = tasaAnual;
-        this.tasaMensual = tasaMensual;
+        this.comisionMensual = comisionMensual;
     }
 
     public double getSaldo() {
@@ -30,20 +29,20 @@ public class Cuenta {
         this.saldo = saldo;
     }
 
-    public int getNumConsiganciones() {
-        return numConsiganciones;
+    public int getNumeroConsignaciones() {
+        return numeroConsignaciones;
     }
 
-    public void setNumConsiganciones(int numConsiganciones) {
-        this.numConsiganciones = numConsiganciones;
+    public void setNumeroConsignaciones(int numeroConsignaciones) {
+        this.numeroConsignaciones = numeroConsignaciones;
     }
 
-    public int getNumRetiros() {
-        return numRetiros;
+    public int getNumeroRetiros() {
+        return numeroRetiros;
     }
 
-    public void setNumRetiros(int numRetiros) {
-        this.numRetiros = numRetiros;
+    public void setNumeroRetiros(int numeroRetiros) {
+        this.numeroRetiros = numeroRetiros;
     }
 
     public double getTasaAnual() {
@@ -54,14 +53,6 @@ public class Cuenta {
         this.tasaAnual = tasaAnual;
     }
 
-    public double getTasaMensual() {
-        return tasaMensual;
-    }
-
-    public void setTasaMensual(double tasaMensual) {
-        this.tasaMensual = tasaMensual;
-    }
-
     public double getComisionMensual() {
         return comisionMensual;
     }
@@ -70,39 +61,51 @@ public class Cuenta {
         this.comisionMensual = comisionMensual;
     }
     
+    public void imprimir(){
+        System.out.println("DATOS CUENTA BANCARIA\n"+
+                "Saldo:"+getSaldo()+"\n"+
+                "Número de Depositos:"+getNumeroConsignaciones()+"\n"+
+                "Número de Retiros:"+getNumeroRetiros()+"\n"+
+                "Tasa Anual Interes:"+getTasaAnual()+"\n"+
+                "Comisión Banco:"+getComisionMensual());
+    
+    }
     public void deposito(double valorDepositar){
         setSaldo(getSaldo()+valorDepositar);
-        setNumConsiganciones(getNumConsiganciones()+1);
+        setNumeroConsignaciones(getNumeroConsignaciones()+1);
     }
     public void retiro(double valorRetirar){
         if(valorRetirar>getSaldo()){
             System.out.println("No cuenta con los fondos suficientes"
                     + " para realizar el retiro");
-        }else{        
+        }else{ 
+            System.out.println("Su saldo era:"+getSaldo());
             setSaldo(getSaldo()-valorRetirar);
-            setNumRetiros(getNumRetiros()+1);
-            System.out.println("El saldo despues del retiro es de: "+getSaldo()+"\n"
-                                +"Su numero de retiro es de: "+getNumRetiros());
+            setNumeroRetiros(getNumeroRetiros()+1);
+            System.out.println("Después del retiro su saldo es:"+getSaldo());
         }
+    
     }
-    public void interesMensual(){
-            double interesMensual = (getSaldo() * ((getTasaAnual() / 12) / 100));
-        setSaldo(getSaldo() + interesMensual);
-    }  
+    
+    public double calculoInteres(){
+        double valorRendimiento=0.00;
+        valorRendimiento=(getSaldo()*((getTasaAnual()/100)/12));
+        //setSaldo(valorRendimiento+getSaldo());
+        return valorRendimiento;
+        
+    }
+    
     public void extractoMensual(){
-        interesMensual();
-        setSaldo(getSaldo()-getComisionMensual());
+        double interes=this.calculoInteres();
+        setSaldo(getSaldo() -getComisionMensual()+interes);
+        System.out.println("------------Estado de Cuenta-------------\n"+
+                "Saldo Actual:"+getSaldo()+"\n"+
+                "Comisión Mensual:"+getComisionMensual()+"\n"+
+                "Interes Ganado en el Mes:"+interes);
+        //los métodos de retorno almacenan su valor en memoria ram
+        //al usar el puntero this estoy haciendo referencia al resultdo
+        //previamente almacenado.
+//        setSaldo(getSaldo() -getComisionMensual()+this.calculoInteres());
+        
     }
-    public void imprimir(){
-        System.out.println("----DATOS CUENTA BANCARIA----\n"
-                + "Saldo: "+getSaldo()+"\n"
-                + "Consiganciones: "+getNumConsiganciones()+"\n"
-                + "Retiros: "+getNumRetiros()+"\n"
-                + "Tasa Anual: "+getTasaAnual()+"\n"
-                + "Tasa mensual: "+getComisionMensual()+"\n");
-    }
-
-// calcular interes
-            //extracto mensual
-            // generar clase hija (cuenta ahorro)   
 }

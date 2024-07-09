@@ -23,8 +23,8 @@ public class Docente extends Personah {
     }
     //CONSTRUCTOR SUPERCLASE
 
-    public Docente(int idDocente, String especialidad, String titulo, String registroSenescyt, String escalaSalarial, int idPesona, String nombre, String apellido, String cedula, int telefono, String direccion, String correoElectronico, String sexo, String fechaNacimiento) {
-        super(idPesona, nombre, apellido, cedula, telefono, direccion, correoElectronico, sexo, fechaNacimiento);
+    public Docente(int idDocente, String especialidad, String titulo, String registroSenescyt, String escalaSalarial, int idPesona, String nombre, String apellido, String cedula, String usuario, String clave, int telefono, String direccion, String correoElectronico, String sexo, String fechaNacimiento) {
+        super(idPesona, nombre, apellido, cedula, usuario, clave, telefono, direccion, correoElectronico, sexo, fechaNacimiento);
         this.idDocente = idDocente;
         this.especialidad = especialidad;
         this.titulo = titulo;

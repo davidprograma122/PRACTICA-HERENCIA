@@ -12,13 +12,15 @@ public class Estudiante extends Personah{
     public Estudiante() {
     }
 
-    public Estudiante(int idEstudiante, int numMatricula, String horario, String jormnada, int idPesona, String nombre, String apellido, String cedula, int telefono, String direccion, String correoElectronico, String sexo, String fechaNacimiento) {
-        super(idPesona, nombre, apellido, cedula, telefono, direccion, correoElectronico, sexo, fechaNacimiento);
+    public Estudiante(int idEstudiante, int numMatricula, String horario, String jormnada, int idPesona, String nombre, String apellido, String cedula, String usuario, String clave, int telefono, String direccion, String correoElectronico, String sexo, String fechaNacimiento) {
+        super(idPesona, nombre, apellido, cedula, usuario, clave, telefono, direccion, correoElectronico, sexo, fechaNacimiento);
         this.idEstudiante = idEstudiante;
         this.numMatricula = numMatricula;
         this.horario = horario;
         this.jormnada = jormnada;
     }
+
+
 
     public int getIdEstudiante() {
         return idEstudiante;

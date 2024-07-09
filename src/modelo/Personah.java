@@ -8,6 +8,8 @@ public class Personah {
     private String nombre;
     private String apellido;
     private String cedula;
+    private String usuario;
+    private String clave;
     private int telefono;
     private String direccion;
     private String correoElectronico;
@@ -17,11 +19,13 @@ public class Personah {
     public Personah() {
     }
 
-    public Personah(int idPesona, String nombre, String apellido, String cedula, int telefono, String direccion, String correoElectronico, String sexo, String fechaNacimiento) {
+    public Personah(int idPesona, String nombre, String apellido, String cedula, String usuario, String clave, int telefono, String direccion, String correoElectronico, String sexo, String fechaNacimiento) {
         this.idPesona = idPesona;
         this.nombre = nombre;
         this.apellido = apellido;
         this.cedula = cedula;
+        this.usuario = usuario;
+        this.clave = clave;
         this.telefono = telefono;
         this.direccion = direccion;
         this.correoElectronico = correoElectronico;
@@ -29,6 +33,7 @@ public class Personah {
         this.fechaNacimiento = fechaNacimiento;
     }
 
+    
     public int getIdPesona() {
         return idPesona;
     }
@@ -60,6 +65,23 @@ public class Personah {
     public void setCedula(String cedula) {
         this.cedula = cedula;
     }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+    
 
     public int getTelefono() {
         return telefono;
@@ -107,6 +129,8 @@ public class Personah {
                 + "APELLIDO: "+ getApellido()+"\n"
                 + "CÉDULA: "+getCedula()+"\n"
                 + "TÉLEFONO: "+getTelefono()+"\n"
+                + "USUARIO: "+getUsuario()+"\n"
+                + "CLAVE: "+"*****"+"\n"
                 + "DIRECCIÓN: "+ getDireccion()+"\n"
                 + "CORREO ELECTRÓNICO: "+getCorreoElectronico()+"\n"
                 + "SEXO: "+getSexo()+"\n"

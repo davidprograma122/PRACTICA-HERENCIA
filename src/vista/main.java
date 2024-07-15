@@ -1,6 +1,7 @@
 package vista;
 
 //import controlador.ConexionBDD;
+import Controlador.EstudianteControlador;
 import Controlador.PersonahControlador;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -101,7 +102,8 @@ public class main {
                 i = 0;
             } else if(op1== 6){
                 System.out.println("Elija la opcion\n"
-                        + "1.Crear persona");
+                        + "1.Crear persona\n"
+                        + "2.Crear estudiante\n");
                 int mp=es.nextInt();
                 if(mp==1){
                     System.out.println("Ingrese los siguentes datos\n");
@@ -131,15 +133,49 @@ public class main {
                     pc.crearPersona(p);
                     
                     
+                }else if (op1==2)
+                System.out.println("Ingrese los siguentes datos personales\n");
+                    Personah p=new Personah();
+                    System.out.println("Ingrese su nombre\n");
+                    p.setNombre(es.next());
+                    System.out.println("Ingrese su apellido\n");
+                    p.setApellido(es.next());
+                    System.out.println("Ingrese su cedula \n");
+                    p.setCedula(es.next());
+                    System.out.println("ingrese un usuario\n");
+                    p.setUsuario(es.next());
+                    System.out.println("ingrese una conraseña\n");
+                    p.setClave(es.next());
+                    System.out.println("ingrese un direccion\n");
+                    p.setDireccion(es.next());
+                    System.out.println("ingrese un correo electronico\n");
+                    p.setCorreoElectronico(es.next());
+                    System.out.println("ingrese f si es femenino o m si es masculino\n");
+                    p.setSexo(es.next());
+                    System.out.println("ingrese su fecha de nacimiento de la fomra (dd-mm-aa)\n");
+                    p.setFechaNacimiento(es.next());
+                    System.out.println("ingrese su número de telefono\n");
+                    p.setTelefono(es.nextInt());
+                    PersonahControlador pc=new PersonahControlador();
+                    pc.crearPersona(p);
+                    
+                    
+                    System.out.println("Ingrese los siguentes datos de estudiante\n");
+                    //OBTENER ID DE LA SUPER CLASE
+                    int idPersona=pc.buscarIdPersona(p.getCedula());
                     
                     
                     
-
+                    Estudiante est=new Estudiante();
+                    System.out.println("Ingrese el numero de matricula\n");
+                    est.setNumMatricula(es.next());
+                    System.out.println("Ingrese la jornada academica\n");
+                    est.setJormnada(es.next());
+                    est.setIdPersona(idPersona);
                     
+                    EstudianteControlador estC=new EstudianteControlador();
+                    estC.crearEstudiante(est);
                     
-                    
-                }
-                
             }
 
         } while (i == 1);

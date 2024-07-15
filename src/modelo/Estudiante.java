@@ -5,22 +5,27 @@
  */
 public class Estudiante extends Personah{
     private int idEstudiante;
-    private int numMatricula;
-    private String horario;
+    private String numMatricula;
     private String jormnada;
+    private int idPersona;
 
     public Estudiante() {
     }
 
-    public Estudiante(int idEstudiante, int numMatricula, String horario, String jormnada, int idPesona, String nombre, String apellido, String cedula, String usuario, String clave, int telefono, String direccion, String correoElectronico, String sexo, String fechaNacimiento) {
+    public Estudiante(int idEstudiante, String numMatricula, String jormnada, int idPersona, int idPesona, String nombre, String apellido, String cedula, String usuario, String clave, int telefono, String direccion, String correoElectronico, String sexo, String fechaNacimiento) {
         super(idPesona, nombre, apellido, cedula, usuario, clave, telefono, direccion, correoElectronico, sexo, fechaNacimiento);
         this.idEstudiante = idEstudiante;
         this.numMatricula = numMatricula;
-        this.horario = horario;
         this.jormnada = jormnada;
+        this.idPersona = idPersona;
     }
 
-
+    public Estudiante(int idEstudiante, String numMatricula, String jormnada, int idPersona) {
+        this.idEstudiante = idEstudiante;
+        this.numMatricula = numMatricula;
+        this.jormnada = jormnada;
+        this.idPersona = idPersona;
+    }
 
     public int getIdEstudiante() {
         return idEstudiante;
@@ -30,20 +35,12 @@ public class Estudiante extends Personah{
         this.idEstudiante = idEstudiante;
     }
 
-    public int getNumMatricula() {
+    public String getNumMatricula() {
         return numMatricula;
     }
 
-    public void setNumMatricula(int numMatricula) {
+    public void setNumMatricula(String numMatricula) {
         this.numMatricula = numMatricula;
-    }
-
-    public String getHorario() {
-        return horario;
-    }
-
-    public void setHorario(String horario) {
-        this.horario = horario;
     }
 
     public String getJormnada() {
@@ -53,6 +50,18 @@ public class Estudiante extends Personah{
     public void setJormnada(String jormnada) {
         this.jormnada = jormnada;
     }
+
+    public int getIdPersona() {
+        return idPersona;
+    }
+
+    public void setIdPersona(int idPersona) {
+        this.idPersona = idPersona;
+    }
+    
+    
+
+    
     
     public String imprirmir(){
         return "------------DATOS DE PERSONA------------\n"
@@ -67,7 +76,6 @@ public class Estudiante extends Personah{
                 + "----------DATOS ESTUDIANTE----------\n"
                 + "ID ESTUDIANTE: "+getIdEstudiante()+"\n"
                 + "NÚMERO DE MATRICULA: "+getNumMatricula()+"\n"
-                + "HORARIO: "+getHorario()+"\n"
                 + "JORNADA: "+ getJormnada()+"\n";
     }
 }

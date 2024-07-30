@@ -5,7 +5,6 @@ import com.mysql.jdbc.PreparedStatement;
 import controlador.ConexionBDD;
 import java.sql.ResultSet;
 import modelo.Estudiante;
-import modelo.Personah;
 
 /**
  *

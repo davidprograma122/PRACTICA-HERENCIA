@@ -163,6 +163,7 @@ public class main {
                     System.out.println("Ingrese los siguentes datos de estudiante\n");
                     //OBTENER ID DE LA SUPER CLASE
                     int idPersona=pc.buscarIdPersona(p.getCedula());
+                    System.out.println("-------------------"+idPersona);
                     
                     
                     

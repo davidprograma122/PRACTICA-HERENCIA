@@ -42,6 +42,7 @@ public class PersonahControlador {
         try {
             String consultaSQL="select idpersona from persona where cedula='"+cedula+"';";
             ejecutar =(PreparedStatement)connection.prepareCall(cedula);
+            ejecutar=(PreparedStatement)connection.prepareCall(consultaSQL);
             resultado=ejecutar.executeQuery();
             if (resultado.next()){
                 int idPersona = resultado.getInt("idPersona");
@@ -49,6 +50,7 @@ public class PersonahControlador {
             }else {
                 System.out.println("Ingrese una cedula valida");
             }
+            
         } catch (Exception e) {
             System.out.println("Error2, comuniquese con el administrador"+e);
         }
